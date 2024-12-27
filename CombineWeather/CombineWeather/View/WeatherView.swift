@@ -19,7 +19,7 @@ struct WeatherView: View {
     
     var body: some View {
         ZStack {
-            BackgroundImageView(name: $imageName)
+            BackgroundImageView(name: imageName)
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
@@ -41,21 +41,21 @@ struct WeatherView: View {
                 
                 HStack {
                     VStack(spacing: 15) {
-                        Text("\(Decimal(networkViewModel.currentWeather.main.temp).formatted(.number.precision(.significantDigits(2))))°c")
+                        Text("\(Decimal(networkViewModel.currentWeather.main.temp).convert)°c")
                             .font(.system(size: 80))
                             .foregroundStyle(.white)
                         
-                        Text("Feel: \(Decimal(networkViewModel.currentWeather.main.feelsLike).formatted(.number.precision(.significantDigits(2))))°c")
+                        Text("Feel: \(Decimal(networkViewModel.currentWeather.main.feelsLike).convert)°c")
                             .font(.system(size: 40))
                             .foregroundStyle(.white)
                         
                         HStack {
-                            Text("Min: \(Decimal(networkViewModel.currentWeather.main.tempMin).formatted(.number.precision(.significantDigits(2))))°c")
+                            Text("Min: \(Decimal(networkViewModel.currentWeather.main.tempMin).convert)°c")
                                 .font(.system(size: 25))
                                 .foregroundStyle(.white)
                             
                             
-                            Text("Max: \(Decimal(networkViewModel.currentWeather.main.tempMax).formatted(.number.precision(.significantDigits(2))))°c")
+                            Text("Max: \(Decimal(networkViewModel.currentWeather.main.tempMax).convert)°c")
                                 .font(.system(size: 25))
                                 .foregroundStyle(.white)
                         }
@@ -75,7 +75,7 @@ struct WeatherView: View {
         }
         .onReceive(coreLocationManager.$location) { _ in
             coreLocationManager.convertCoordinateToAddress()
-            networkViewModel.fetchWeather(city: coreLocationManager.area ?? "london")
+            networkViewModel.fetchWeather(city: coreLocationManager.area ?? "paris")
             getCondition()
         }
     }

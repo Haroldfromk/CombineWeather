@@ -9,7 +9,7 @@ import SwiftUI
 import WebKit
 
 struct BackgroundImageView: UIViewRepresentable {
-    @Binding var name: String
+    var name: String
     
     func makeUIView(context: Context) -> UIView {
         let containerView = UIView()
@@ -32,16 +32,16 @@ struct BackgroundImageView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
-//        guard let gifView = createGIFView() else { return }
-//            uiView.subviews.forEach { $0.removeFromSuperview() }
-//            uiView.addSubview(gifView)
-//            gifView.translatesAutoresizingMaskIntoConstraints = false
-//            NSLayoutConstraint.activate([
-//                gifView.topAnchor.constraint(equalTo: uiView.topAnchor),
-//                gifView.bottomAnchor.constraint(equalTo: uiView.bottomAnchor),
-//                gifView.leadingAnchor.constraint(equalTo: uiView.leadingAnchor),
-//                gifView.trailingAnchor.constraint(equalTo: uiView.trailingAnchor),
-//            ])
+        guard let gifView = createGIFView() else { return }
+            uiView.subviews.forEach { $0.removeFromSuperview() }
+            uiView.addSubview(gifView)
+            gifView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                gifView.topAnchor.constraint(equalTo: uiView.topAnchor),
+                gifView.bottomAnchor.constraint(equalTo: uiView.bottomAnchor),
+                gifView.leadingAnchor.constraint(equalTo: uiView.leadingAnchor),
+                gifView.trailingAnchor.constraint(equalTo: uiView.trailingAnchor),
+            ])
     }
     
     private func createGIFView() -> UIImageView? {
